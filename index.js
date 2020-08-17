@@ -121,6 +121,20 @@ Final Score: awayTeam - homeTeam */
 
 
 function scoreboard(getInningScoreCB, inningCB, inningsCount ) {
+  function numSuffix(num) {
+    if (num % 100 > 10 && num % 100 < 20){
+      return "th"
+    } else if (num % 10 === 1) {
+      return "st"
+    } else if (num % 10 === 2) {
+      return "nd"
+    } else if (num % 10 === 3) {
+      return "rd"
+    } else {
+      return "th"
+    }
+  }
+
   let homeTotal = 0;
   let awayTotal = 0;
 
@@ -129,14 +143,14 @@ function scoreboard(getInningScoreCB, inningCB, inningsCount ) {
     let awayInning = getInningScoreCB();
     homeTotal += homeInning;
     awayTotal += awayInning;
-    console.log(`${i} inning: ${awayInning} - ${homeInning}`);
+    console.log(`${i + numSuffix(i)} inning: ${awayInning} - ${homeInning}`);
   }
-  return `Final Score: ${awayTotal} - ${homeTotal}`
+  return `Final Score: ${awayTotal} - ${homeTotal}`;
 
 }
 
 console.log("");
-console.log("Task 4:")
+console.log("Task 4:");
 console.log(scoreboard(inning, 0, 9));
 
 
