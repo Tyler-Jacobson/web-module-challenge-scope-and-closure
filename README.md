@@ -42,6 +42,7 @@ Find the file `index.js` and complete the tasks.
 Edit the `ReadMe` file with your answers.
 
 1. In your own words, define closure (1-2 sentences).
+    When information is passed between different scopes within a function
 2. Study the following code, then answer the questions below.
 
 ```js
@@ -63,8 +64,13 @@ dansRoll();
 ```
 
 a. Where is closure used in this code? How can you tell?
+    When 'name' is passed from personalDice to the higher level function
+
 b. Compare and contrast calling `dansRoll` the first and second time. What is always the same? What could change?
+    The range of the roll is always the same. The actual output is randomized from 0 - 5
+
 c. What is the lexical scope of `newRoll`? 
+    Everything inside of both functions and within the global scope
 
 ### Task 2c - Exit Ticket
 

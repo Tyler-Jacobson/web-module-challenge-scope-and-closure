@@ -27,10 +27,13 @@ function processFirstItem(stringList, callback) {
  * Study the code for counter1 and counter2. Answer the questions below.
  * 
  * 1. What is the difference between counter1 and counter2?
+ *  Counter1 has an embedded function, counter2 does not.
  * 
  * 2. Which of the two uses a closure? How can you tell?
+ *  Counter1. It has an inner function which pulls information from the outer function.
  * 
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
+ *   Counter1 is likely preferable if you plan to use the main function multiple times to keep track of an increating number. 
  *
 */
 
@@ -56,11 +59,12 @@ function counter2() {
 
 Write a function called `inning` that returns a random number of points that a team scored in an inning. This should be a whole number between 0 and 2. */
 
-function inning(/*Code Here*/){
-
-    /*Code Here*/
-
+function inning(){
+  return Math.floor(Math.random() * 3);
 }
+
+console.log("Task 2:")
+console.log(inning());
 
 /* Task 3: finalScore()
 
@@ -76,11 +80,24 @@ finalScore(inning, 9) might return:
 
 */ 
 
-function finalScore(/*code Here*/){
-
-  /*Code Here*/
-
+function finalScore(cb, inningsNum){
+    homeScore = 0
+    awayScore = 0
+    
+    for (let i = 0; i < inningsNum; i++) {
+      homeScore += cb();
+      awayScore += cb();
+    }
+    let bothScores = {
+      Home: homeScore,
+      Away: awayScore
+    }
+    return bothScores;
 }
+
+console.log("");
+console.log("Task 3:");
+console.log(finalScore(inning, 9));
 
 /* Task 4: 
 
@@ -103,8 +120,39 @@ and returns the score at each pont in the game, like so:
 Final Score: awayTeam - homeTeam */
 
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function scoreboard(getInningScoreCB, inningCB, inningsCount ) {
+  function numSuffix(num) {
+    if (num % 100 > 10 && num % 100 < 20){
+      return "th"
+    } else if (num % 10 === 1) {
+      return "st"
+    } else if (num % 10 === 2) {
+      return "nd"
+    } else if (num % 10 === 3) {
+      return "rd"
+    } else {
+      return "th"
+    }
+  }
+
+  let homeTotal = 0;
+  let awayTotal = 0;
+
+  for (let i  = 1; i <= inningsCount; i++) {
+    let homeInning = getInningScoreCB();
+    let awayInning = getInningScoreCB();
+    homeTotal += homeInning;
+    awayTotal += awayInning;
+    console.log(`${i + numSuffix(i)} inning: ${awayInning} - ${homeInning}`);
+  }
+  return `Final Score: ${awayTotal} - ${homeTotal}`;
+
 }
+
+console.log("");
+console.log("Task 4:");
+console.log(scoreboard(inning, 0, 9));
+
+
 
 
